@@ -20,12 +20,14 @@
 
 package org.videolan.libvlc;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
 import org.videolan.libvlc.util.HWDecoderUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 
 @SuppressWarnings("unused, JniMissingFunction")
@@ -155,7 +157,8 @@ public class LibVLC extends VLCObject<LibVLC.Event> {
 
     private static boolean sLoaded = false;
 
-    static synchronized void loadLibraries() {
+    @SuppressLint("UnsafeDynamicallyLoadedCode")
+    private static synchronized void loadLibraries(Context context) {
         if (sLoaded)
             return;
         sLoaded = true;
@@ -185,7 +188,7 @@ public class LibVLC extends VLCObject<LibVLC.Event> {
         }
 
         try {
-            System.loadLibrary("vlc");
+            System.load(context.getFilesDir() + File.separator + "libvlc.so");
             System.loadLibrary("vlcjni");
         } catch (UnsatisfiedLinkError ule) {
             Log.e(TAG, "Can't load vlcjni library: " + ule);
