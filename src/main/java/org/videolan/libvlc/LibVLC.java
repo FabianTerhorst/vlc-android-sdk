@@ -51,7 +51,7 @@ public class LibVLC extends VLCObject<LibVLC.Event> {
      * @param options
      */
     public LibVLC(Context context, ArrayList<String> options) {
-        loadLibraries();
+        loadLibraries(context);
 
         boolean setAout = true, setChroma = true;
         // check if aout/vout options are already set
