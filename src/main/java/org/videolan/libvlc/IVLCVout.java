@@ -23,7 +23,7 @@ package org.videolan.libvlc;
 import android.annotation.TargetApi;
 import android.graphics.SurfaceTexture;
 import android.os.Build;
-import android.support.annotation.MainThread;
+
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -43,25 +43,25 @@ public interface IVLCVout {
          * @param sarNum Surface aspect ratio numerator
          * @param sarDen Surface aspect ratio denominator
          */
-        @MainThread
+
         void onNewLayout(IVLCVout vlcVout, int width, int height, int visibleWidth, int visibleHeight, int sarNum, int sarDen);
 
         /**
          * This callback is called when surfaces are created.
          */
-        @MainThread
+
         void onSurfacesCreated(IVLCVout vlcVout);
 
         /**
          * This callback is called when surfaces are destroyed.
          */
-        @MainThread
+
         void onSurfacesDestroyed(IVLCVout vlcVout);
 
         /**
          * TODO: temporary method, will be removed when VLC can handle decoder fallback
          */
-        @MainThread
+
         void onHardwareAccelerationError(IVLCVout vlcVout);
     }
 
@@ -69,14 +69,14 @@ public interface IVLCVout {
      * Set a surfaceView used for video out.
      * @see #attachViews()
      */
-    @MainThread
+
     void setVideoView(SurfaceView videoSurfaceView);
 
     /**
      * Set a TextureView used for video out.
      * @see #attachViews()
      */
-    @MainThread
+
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     void setVideoView(TextureView videoTextureView);
 
@@ -87,7 +87,7 @@ public interface IVLCVout {
      * and to get notified when surface is destroyed.
      * @see #attachViews()
      */
-    @MainThread
+
     void setVideoSurface(Surface videoSurface, SurfaceHolder surfaceHolder);
 
     /**
@@ -95,7 +95,7 @@ public interface IVLCVout {
      * @param videoSurfaceTexture this surface must be valid and attached.
      * @see #attachViews()
      */
-    @MainThread
+
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     void setVideoSurface(SurfaceTexture videoSurfaceTexture);
 
@@ -103,14 +103,14 @@ public interface IVLCVout {
      * Set a surfaceView used for subtitles out.
      * @see #attachViews()
      */
-    @MainThread
+
     void setSubtitlesView(SurfaceView subtitlesSurfaceView);
 
     /**
      * Set a TextureView used for subtitles out.
      * @see #attachViews()
      */
-    @MainThread
+
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     void setSubtitlesView(TextureView subtitlesTextureView);
 
@@ -121,7 +121,7 @@ public interface IVLCVout {
      * and to get notified when surface is destroyed.
      * @see #attachViews()
      */
-    @MainThread
+
     void setSubtitlesSurface(Surface subtitlesSurface, SurfaceHolder surfaceHolder);
 
     /**
@@ -129,7 +129,7 @@ public interface IVLCVout {
      * @param subtitlesSurfaceTexture this surface must be valid and attached.
      * @see #attachViews()
      */
-    @MainThread
+
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     void setSubtitlesSurface(SurfaceTexture subtitlesSurfaceTexture);
 
@@ -142,32 +142,32 @@ public interface IVLCVout {
      * @see #setSubtitlesView(TextureView)
      * @see #setSubtitlesSurface(Surface, SurfaceHolder)
      */
-    @MainThread
+
     void attachViews();
 
     /**
      * Detach views previously attached.
      * This will be called automatically when surfaces are destroyed.
      */
-    @MainThread
+
     void detachViews();
 
     /**
      * Return true if views are attached. If surfaces were destroyed, this will return false.
      */
-    @MainThread
+
     boolean areViewsAttached();
 
     /**
      * Add a callback to receive {@link Callback#onNewLayout} events.
      */
-    @MainThread
+
     void addCallback(Callback callback);
 
     /**
      * Remove a callback.
      */
-    @MainThread
+
     void removeCallback(Callback callback);
 
     /**
@@ -177,7 +177,7 @@ public interface IVLCVout {
      * @param x x coordinate.
      * @param y y coordinate.
      */
-    @MainThread
+
     void sendMouseEvent(int action, int button, int x, int y);
 
     /**
@@ -185,6 +185,6 @@ public interface IVLCVout {
      * @param width width of the window.
      * @param height height of the window.
      */
-    @MainThread
+
     void setWindowSize(int width, int height);
 }

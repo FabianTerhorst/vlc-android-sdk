@@ -21,7 +21,7 @@
 package org.videolan.libvlc.util;
 
 import android.net.Uri;
-import android.support.annotation.MainThread;
+
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -102,7 +102,7 @@ public class MediaBrowser {
     /**
      * Release the MediaBrowser.
      */
-    @MainThread
+
     public void release() {
         reset();
         if (!mAlive)
@@ -115,7 +115,7 @@ public class MediaBrowser {
      * Reset this media browser and register a new EventListener
      * @param eventListener new EventListener for this browser
      */
-    @MainThread
+
     public void changeEventListener(EventListener eventListener){
         reset();
         mEventListener = eventListener;
@@ -133,7 +133,7 @@ public class MediaBrowser {
     /**
      * Discover all networks shares
      */
-    @MainThread
+
     public void discoverNetworkShares() {
         reset();
 
@@ -151,7 +151,7 @@ public class MediaBrowser {
      * Discover networks shares using a specified Discoverer
      * @param serviceName see {@link MediaDiscoverer.Description.Category#name}
      */
-    @MainThread
+
     public void discoverNetworkShares(String serviceName) {
         reset();
         startMediaDiscoverer(serviceName);
@@ -163,7 +163,7 @@ public class MediaBrowser {
      * @param path
      * @param flags see {@link MediaBrowser.Flag}
      */
-    @MainThread
+
     public void browse(String path, int flags) {
         final Media media = new Media(mLibVlc, path);
         browse(media, flags);
@@ -176,7 +176,7 @@ public class MediaBrowser {
      * @param uri
      * @param flags see {@link MediaBrowser.Flag}
      */
-    @MainThread
+
     public void browse(Uri uri, int flags) {
         final Media media = new Media(mLibVlc, uri);
         browse(media, flags);
@@ -189,7 +189,7 @@ public class MediaBrowser {
      * @param media Can be a media returned by MediaBrowser.
      * @param flags see {@link MediaBrowser.Flag}
      */
-    @MainThread
+
     public void browse(Media media, int flags) {
         /* media can be associated with a medialist,
          * so increment ref count in order to don't clean it with the medialist
@@ -211,7 +211,7 @@ public class MediaBrowser {
     /**
      * Get the number or media.
      */
-    @MainThread
+
     public int getMediaCount() {
         return mBrowserMediaList != null ? mBrowserMediaList.getCount() : mDiscovererMediaArray.size();
     }
@@ -219,7 +219,7 @@ public class MediaBrowser {
     /**
      * Get a media at a specified index. Should be released with {@link #release()}.
      */
-    @MainThread
+
     public Media getMediaAt(int index) {
         if (index < 0 || index >= getMediaCount())
             throw new IndexOutOfBoundsException();
@@ -235,7 +235,7 @@ public class MediaBrowser {
      *
      * @param list files extensions to be ignored by browser
      */
-    @MainThread
+
     public void setIgnoreFileTypes(String list) {
         mIgnoreList = list;
     }

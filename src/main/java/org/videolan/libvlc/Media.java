@@ -21,7 +21,6 @@
 package org.videolan.libvlc;
 
 import android.net.Uri;
-import android.support.annotation.Nullable;
 
 import org.videolan.libvlc.util.AndroidUtil;
 import org.videolan.libvlc.util.HWDecoderUtil;
@@ -768,7 +767,6 @@ public class Media extends VLCObject<Media.Event> {
      * {@link #addSlave(Slave)}. The typical use case of this function is to save
      * a list of slave in a database for a later use.
      */
-    @Nullable
     public Slave[] getSlaves() {
         return nativeGetSlaves();
     }

@@ -25,7 +25,7 @@ import android.graphics.SurfaceTexture;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.MainThread;
+
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -45,9 +45,9 @@ public class AWindow implements IVLCVout {
     private static final int ID_MAX = 2;
 
     public interface SurfaceCallback {
-        @MainThread
+
         void onSurfacesCreated(AWindow vout);
-        @MainThread
+
         void onSurfacesDestroyed(AWindow vout);
     }
 
@@ -259,13 +259,13 @@ public class AWindow implements IVLCVout {
     }
 
     @Override
-    @MainThread
+
     public void setVideoView(SurfaceView videoSurfaceView) {
         setView(ID_VIDEO, videoSurfaceView);
     }
 
     @Override
-    @MainThread
+
     public void setVideoView(TextureView videoTextureView) {
         setView(ID_VIDEO, videoTextureView);
     }
@@ -282,13 +282,13 @@ public class AWindow implements IVLCVout {
     }
 
     @Override
-    @MainThread
+
     public void setSubtitlesView(SurfaceView subtitlesSurfaceView) {
         setView(ID_SUBTITLES, subtitlesSurfaceView);
     }
 
     @Override
-    @MainThread
+
     public void setSubtitlesView(TextureView subtitlesTextureView) {
         setView(ID_SUBTITLES, subtitlesTextureView);
     }
@@ -305,7 +305,7 @@ public class AWindow implements IVLCVout {
     }
 
     @Override
-    @MainThread
+
     public void attachViews() {
         if (mSurfacesState.get() != SURFACE_STATE_INIT || mSurfaceHelpers[ID_VIDEO] == null)
             throw new IllegalStateException("already attached or video view not configured");
@@ -322,7 +322,7 @@ public class AWindow implements IVLCVout {
     }
 
     @Override
-    @MainThread
+
     public void detachViews() {
         if (mSurfacesState.get() == SURFACE_STATE_INIT)
             return;
@@ -345,12 +345,12 @@ public class AWindow implements IVLCVout {
     }
 
     @Override
-    @MainThread
+
     public boolean areViewsAttached() {
         return mSurfacesState.get() != SURFACE_STATE_INIT;
     }
 
-    @MainThread
+
     private void onSurfaceCreated() {
         if (mSurfacesState.get() != SURFACE_STATE_ATTACHED)
             throw new IllegalArgumentException("invalid state");
@@ -369,7 +369,7 @@ public class AWindow implements IVLCVout {
         }
     }
 
-    @MainThread
+
     private void onSurfaceDestroyed() {
         detachViews();
     }

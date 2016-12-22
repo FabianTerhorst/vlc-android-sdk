@@ -21,7 +21,7 @@
 package org.videolan.libvlc.util;
 
 import android.net.Uri;
-import android.support.annotation.MainThread;
+
 
 import org.videolan.libvlc.LibVLC;
 import org.videolan.libvlc.Media;
@@ -45,7 +45,7 @@ public class Dumper {
      * @param filepath local filesystem path where to dump the Uri
      * @param listener listener in order to be notified when the dump is finished
      */
-    @MainThread
+
     public Dumper(Uri uri, String filepath, Listener listener) {
         if (uri == null || filepath == null || listener == null)
             throw new IllegalArgumentException("arguments shouldn't be null");
@@ -86,7 +86,7 @@ public class Dumper {
     /**
      * Start to dump
      */
-    @MainThread
+
     public void start() {
         mMediaPlayer.play();
     }
@@ -95,7 +95,7 @@ public class Dumper {
      * Cancel the dump of the Uri.
      * Don't call this method if you already received the {@link Listener#onFinish(boolean)} callback.
      */
-    @MainThread
+
     public void cancel() {
         mMediaPlayer.stop();
         mMediaPlayer.release();

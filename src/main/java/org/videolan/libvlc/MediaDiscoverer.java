@@ -20,8 +20,6 @@
 
 package org.videolan.libvlc;
 
-import android.support.annotation.Nullable;
-
 @SuppressWarnings("unused, JniMissingFunction")
 public class MediaDiscoverer extends VLCObject<MediaDiscoverer.Event> {
     private final static String TAG = "LibVLC/MediaDiscoverer";
@@ -146,7 +144,6 @@ public class MediaDiscoverer extends VLCObject<MediaDiscoverer.Event> {
      * Get media discoverers by category
      * @param category see {@link Description.Category}
      */
-    @Nullable
     public static Description[] list(LibVLC libVLC, int category) {
         return nativeList(libVLC, category);
     }

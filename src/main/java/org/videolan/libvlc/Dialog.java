@@ -22,7 +22,7 @@ package org.videolan.libvlc;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.MainThread;
+
 
 @SuppressWarnings("unused, JniMissingFunction")
 public abstract class Dialog {
@@ -36,7 +36,7 @@ public abstract class Dialog {
          *
          * @param dialog error dialog to be displayed
          */
-        @MainThread
+
         void onDisplay(ErrorMessage dialog);
 
         /**
@@ -47,7 +47,7 @@ public abstract class Dialog {
          *
          * @param dialog login dialog to be displayed
          */
-        @MainThread
+
         void onDisplay(LoginDialog dialog);
 
         /**
@@ -58,7 +58,7 @@ public abstract class Dialog {
          *
          * @param dialog question dialog to be displayed
          */
-        @MainThread
+
         void onDisplay(QuestionDialog dialog);
 
         /**
@@ -68,7 +68,7 @@ public abstract class Dialog {
          *
          * @param dialog question dialog to be displayed
          */
-        @MainThread
+
         void onDisplay(ProgressDialog dialog);
 
         /**
@@ -76,7 +76,7 @@ public abstract class Dialog {
          *
          * @param dialog dialog to be canceled
          */
-        @MainThread
+
         void onCanceled(Dialog dialog);
 
         /**
@@ -87,7 +87,7 @@ public abstract class Dialog {
          *
          * @param dialog dialog to be updated
          */
-        @MainThread
+
         void onProgressUpdate(ProgressDialog dialog);
     }
 
@@ -117,7 +117,7 @@ public abstract class Dialog {
      * {@link Dialog#TYPE_PROGRESS}
      * @return
      */
-    @MainThread
+
     public int getType() {
         return mType;
     }
@@ -125,7 +125,7 @@ public abstract class Dialog {
     /**
      * Get the title of the dialog
      */
-    @MainThread
+
     public String getTitle() {
         return mTitle;
     }
@@ -133,7 +133,7 @@ public abstract class Dialog {
     /**
      * Get the text of the dialog
      */
-    @MainThread
+
     public String getText() {
         return mText;
     }
@@ -141,7 +141,7 @@ public abstract class Dialog {
     /**
      * Associate an object with the dialog
      */
-    @MainThread
+
     public void setContext(Object context) {
         mContext = context;
     }
@@ -149,7 +149,7 @@ public abstract class Dialog {
     /**
      * Return the object associated with the dialog
      */
-    @MainThread
+
     public Object getContext() {
         return mContext;
     }
@@ -157,7 +157,7 @@ public abstract class Dialog {
     /**
      * Dismiss the dialog
      */
-    @MainThread
+
     public void dismiss() {
     }
 
@@ -167,7 +167,7 @@ public abstract class Dialog {
      * @param libVLC valid LibVLC object
      * @param callbacks dialog callbacks or null to unregister
      */
-    @MainThread
+
     public static void setCallbacks(LibVLC libVLC, Callbacks callbacks) {
         if (callbacks != null && sHandler == null)
             sHandler = new Handler(Looper.getMainLooper());
@@ -195,7 +195,7 @@ public abstract class Dialog {
             mId = id;
         }
 
-        @MainThread
+
         public void dismiss() {
             if (mId != 0) {
                 nativeDismiss(mId);
@@ -223,7 +223,7 @@ public abstract class Dialog {
         /**
          * Get the default user name that should be pre-filled
          */
-        @MainThread
+
         public String getDefaultUsername() {
             return mDefaultUsername;
         }
@@ -233,7 +233,7 @@ public abstract class Dialog {
          *
          * @return if true, add a checkbox that ask to the user if he wants to store the credentials
          */
-        @MainThread
+
         public boolean asksStore() {
             return mAskStore;
         }
@@ -245,7 +245,7 @@ public abstract class Dialog {
          * @param password valid password (can be empty)
          * @param store if true, store the credentials
          */
-        @MainThread
+
         public void postLogin(String username, String password, boolean store) {
             if (mId != 0) {
                 nativePostLogin(mId, username, password, store);
@@ -286,7 +286,7 @@ public abstract class Dialog {
          * See {@link QuestionDialog#TYPE_NORMAL}, {@link QuestionDialog#TYPE_WARNING} and
          * {@link QuestionDialog#TYPE_ERROR}
          */
-        @MainThread
+
         public int getQuestionType() {
             return mQuestionType;
         }
@@ -294,7 +294,7 @@ public abstract class Dialog {
         /**
          * Get the text of the cancel button
          */
-        @MainThread
+
         public String getCancelText() {
             return mCancelText;
         }
@@ -302,7 +302,7 @@ public abstract class Dialog {
         /**
          * Get the text of the first button (optional, can be null)
          */
-        @MainThread
+
         public String getAction1Text() {
             return mAction1Text;
         }
@@ -310,7 +310,7 @@ public abstract class Dialog {
         /**
          * Get the text of the second button (optional, can be null)
          */
-        @MainThread
+
         public String getAction2Text() {
             return mAction2Text;
         }
@@ -320,7 +320,7 @@ public abstract class Dialog {
          *
          * @param action 1 for first action, 2 for second action
          */
-        @MainThread
+
         public void postAction(int action) {
             if (mId != 0) {
                 nativePostAction(mId, action);
@@ -351,7 +351,7 @@ public abstract class Dialog {
         /**
          * Return true if the progress dialog is inderterminate
          */
-        @MainThread
+
         public boolean isIndeterminate() {
             return mIndeterminate;
         }
@@ -359,7 +359,7 @@ public abstract class Dialog {
         /**
          * Return true if the progress dialog is cancelable
          */
-        @MainThread
+
         public boolean isCancelable() {
             return mCancelText != null;
         }
@@ -368,7 +368,7 @@ public abstract class Dialog {
          * Get the position of the progress dialog
          * @return position between 0.0 and 1.0
          */
-        @MainThread
+
         public float getPosition() {
             return mPosition;
         }
@@ -376,7 +376,7 @@ public abstract class Dialog {
         /**
          * Get the text of the cancel button
          */
-        @MainThread
+
         public String getCancelText() {
             return mCancelText;
         }

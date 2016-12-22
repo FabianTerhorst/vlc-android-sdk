@@ -38,7 +38,9 @@ public class LibVLC extends VLCObject<LibVLC.Event> {
         }
     }
 
-    /** Native crash handler */
+    /**
+     * Native crash handler
+     */
     private static OnNativeCrashListener sOnNativeCrashListener;
 
     /**
@@ -91,18 +93,21 @@ public class LibVLC extends VLCObject<LibVLC.Event> {
 
     /**
      * Get the libVLC version
+     *
      * @return the libVLC version string
      */
     public native String version();
 
     /**
      * Get the libVLC compiler
+     *
      * @return the libVLC compiler string
      */
     public native String compiler();
 
     /**
      * Get the libVLC changeset
+     *
      * @return the libVLC changeset string
      */
     public native String changeset();
@@ -137,13 +142,15 @@ public class LibVLC extends VLCObject<LibVLC.Event> {
      * @param name human-readable application name, e.g. "FooBar player 1.2.3"
      * @param http HTTP User Agent, e.g. "FooBar/1.2.3 Python/2.6.0"
      */
-    public void setUserAgent(String name, String http){
+    public void setUserAgent(String name, String http) {
         nativeSetUserAgent(name, http);
     }
 
     /* JNI */
     private native void nativeNew(String[] options, String homePath);
+
     private native void nativeRelease();
+
     private native void nativeSetUserAgent(String name, String http);
 
     private static boolean sLoaded = false;
@@ -153,43 +160,29 @@ public class LibVLC extends VLCObject<LibVLC.Event> {
             return;
         sLoaded = true;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD_MR1) {
-            try {
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR1)
-                    System.loadLibrary("anw.10");
-                else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR2)
-                    System.loadLibrary("anw.13");
-                else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR1)
-                    System.loadLibrary("anw.14");
-                else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT_WATCH)
-                    System.loadLibrary("anw.18");
-                else
-                    System.loadLibrary("anw.21");
-            } catch (Throwable t) {
-                Log.d(TAG, "anw library not loaded");
-            }
-
-            try {
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1)
-                    System.loadLibrary("iomx.10");
-                else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR2)
-                    System.loadLibrary("iomx.13");
-                else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR1)
-                    System.loadLibrary("iomx.14");
-                else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2)
-                    System.loadLibrary("iomx.18");
-                else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT)
-                    System.loadLibrary("iomx.19");
-            } catch (Throwable t) {
-                // No need to warn if it isn't found, when we intentionally don't build these except for debug
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
-                    Log.w(TAG, "Unable to load the iomx library: " + t);
-            }
+        try {
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                System.loadLibrary("anw.14");
+            else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT_WATCH)
+                System.loadLibrary("anw.18");
+            else
+                System.loadLibrary("anw.21");
+        } catch (Throwable t) {
+            Log.d(TAG, "anw library not loaded");
         }
 
         try {
-            System.loadLibrary("compat.7");
-        } catch (Throwable ignored) {}
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                System.loadLibrary("iomx.14");
+            else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2)
+                System.loadLibrary("iomx.18");
+            else if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT)
+                System.loadLibrary("iomx.19");
+        } catch (Throwable t) {
+            // No need to warn if it isn't found, when we intentionally don't build these except for debug
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
+                Log.w(TAG, "Unable to load the iomx library: " + t);
+        }
 
         try {
             System.loadLibrary("vlc");
